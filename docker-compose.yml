@@ -1,0 +1,112 @@
+networks:
+  airflow-network:
+    driver: bridge
+    
+services:
+  clickhouse:
+    image: yandex/clickhouse-server
+    container_name: dwh_clickhouse
+    environment:
+      - CLICKHOUSE_USER=default
+      - CLICKHOUSE_PASSWORD=default
+      - CLICKHOUSE_DB=default
+    ports:
+      - "8123:8123"
+      - "9000:9000"
+    networks:
+      - airflow-network
+
+  postgres:
+    build: .  # Собираем образ из Dockerfile
+    container_name: dwh_postgres
+    environment:
+      POSTGRES_USER: default
+      POSTGRES_PASSWORD: default
+      POSTGRES_DB: NorthWind
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - airflow-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U default"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  airflow-init:
+    image: apache/airflow:2.2.3
+    depends_on:
+        postgres:
+          condition: service_healthy
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://default:default@postgres/airflow_db
+      - AIRFLOW__WEBSERVER__SECRET_KEY=c920c13f55757775c74c3b2328177e60
+      - AIRFLOW__CORE__LOGGING_LEVEL=INFO
+    volumes:
+      - ./logs:/opt/airflow/logs
+    command: >
+      bash -c "
+        airflow db init &&
+        airflow users create --username admin --firstname Admin --lastname User --role Admin --email admin@example.com --password admin
+      "
+    networks:
+      - airflow-network
+
+  airflow-webserver:
+    image: apache/airflow:2.2.3
+    depends_on:
+        postgres:
+          condition: service_healthy
+        airflow-init:
+          condition: service_completed_successfully
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://default:default@postgres/airflow_db
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__SECRET_KEY=c920c13f55757775c74c3b2328177e60
+      - AIRFLOW__CORE__LOGGING_LEVEL=INFO
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+    ports:
+      - "8090:8080"
+    command: airflow webserver
+    networks:
+      - airflow-network
+
+  airflow-scheduler:
+    image: apache/airflow:2.2.3
+    depends_on:
+        postgres:
+          condition: service_healthy
+        airflow-init:
+          condition: service_completed_successfully
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://default:default@postgres/airflow_db
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__WEBSERVER__SECRET_KEY=c920c13f55757775c74c3b2328177e60
+      - AIRFLOW__CORE__LOGGING_LEVEL=INFO
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+    command: airflow scheduler
+    networks:
+      - airflow-network
+
+  dbt:
+    image: python:3.9-slim
+    container_name: dwh_dbt
+    volumes:
+      - ./dbt:/dbt
+    working_dir: /dbt/dwh_clickhouse
+    environment:
+      - DBT_PROFILES_DIR=/dbt
+    networks:
+      - airflow-network
+    command: sleep infinity
+
+volumes:
+  postgres_data:
