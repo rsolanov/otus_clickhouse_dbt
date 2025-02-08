@@ -97,7 +97,7 @@ services:
       - airflow-network
 
   dbt:
-    image: python:3.9-slim
+    image: python:3.12
     container_name: dwh_dbt
     volumes:
       - ./dbt:/dbt
