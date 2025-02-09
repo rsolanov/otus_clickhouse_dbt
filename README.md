@@ -1,5 +1,6 @@
 # Развертывание проекта
 - docker-compose build postgres
+- docker-compose build dbt
 - docker-compose up -d
 
 # Комманды для поддержки инфраструктуры
