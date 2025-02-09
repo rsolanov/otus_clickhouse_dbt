@@ -15,3 +15,7 @@
 
 ## Локальный проект
 - Установка библиотек Python: cd dbt; pip install -r requirements.txt
+
+## Команды dbt
+- Запуск build для локального проекта: dbt build --target local
+- запуск build для контейнера: dbt build --target container
