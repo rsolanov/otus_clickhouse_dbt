@@ -18,7 +18,9 @@ services:
       - airflow-network
 
   postgres:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.postgres
     container_name: dwh_postgres
     environment:
       POSTGRES_USER: default
