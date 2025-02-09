@@ -1,0 +1,14 @@
+FROM python:3.12
+
+# Обновление списков пакетов и установка mc
+RUN apt-get update && \
+    apt-get install -y mc && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /dbt/dwh_clickhouse
+
+COPY dbt/requirements.txt /dbt/
+RUN pip install --no-cache-dir -r /dbt/requirements.txt
+
+CMD ["sleep", "infinity"]

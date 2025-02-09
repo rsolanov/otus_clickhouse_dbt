@@ -97,16 +97,14 @@ services:
       - airflow-network
 
   dbt:
-    image: python:3.12
+    build:
+      context: .
+      dockerfile: Dockerfile.dbt
     container_name: dwh_dbt
     volumes:
       - ./dbt:/dbt
-    working_dir: /dbt/dwh_clickhouse
-    environment:
-      - DBT_PROFILES_DIR=/dbt
     networks:
       - airflow-network
-    command: sleep infinity
 
 volumes:
   postgres_data:
