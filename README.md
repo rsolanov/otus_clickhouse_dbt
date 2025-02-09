@@ -1,7 +1,9 @@
 # Развертывание проекта
-- docker-compose build postgres
-- docker-compose build dbt
+- docker-compose build
 - docker-compose up -d
+- В браузере перейти на страницу Airflow http://localhost:8090/home
+- Запустить даг dbt_daily_build
+- Подключиться к ClickHouse и удостовериться что все необходимые таблицы созданы и содержат данные
 
 # Комманды для поддержки инфраструктуры
 ## Docker Containers
