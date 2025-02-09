@@ -12,6 +12,9 @@
   - PowerShell: docker-compose rm -sf dbt; docker-compose build dbt; docker-compose up -d dbt
   - Bash: docker-compose rm -sf dbt && docker-compose build dbt && docker-compose up -d dbt
 - Перейти в контейнер и запустить bash команды: docker-compose exec dbt bash
+- Пересборка всех образов: docker-compose up -d --build
+- Остановка и удаление всех контейнеров: docker-compose down
+- Запуск всех контейнеров: docker-compose up -d
 
 ## Локальный проект
 - Установка библиотек Python: cd dbt; pip install -r requirements.txt

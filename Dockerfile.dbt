@@ -1,6 +1,5 @@
 FROM python:3.12
 
-# Обновление списков пакетов и установка mc
 RUN apt-get update && \
     apt-get install -y mc && \
     apt-get clean && \
