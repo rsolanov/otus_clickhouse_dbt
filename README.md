@@ -13,6 +13,8 @@
   - Bash: docker-compose rm -sf dbt && docker-compose build dbt && docker-compose up -d dbt
 - Перейти в контейнер и запустить bash команды: docker-compose exec dbt bash
 - Пересборка всех образов: docker-compose up -d --build
+- Сборка всех образов: docker-compose build
+- Удаление всех образов: ```docker rmi $(docker-compose config | grep "image:" | awk '{print $2}' | sort | uniq)```
 - Остановка и удаление всех контейнеров: docker-compose down
 - Запуск всех контейнеров: docker-compose up -d
 
