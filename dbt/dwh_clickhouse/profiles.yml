@@ -7,13 +7,13 @@ dwh_clickhouse:
       port: 8123
       user: default
       password: default
-      database: default
-      schema: default
+      database: dwh
+      schema: dwh
     container:
       type: clickhouse
       host: clickhouse
       port: 9000
       user: default
       password: default
-      database: default
-      schema: default
+      database: dwh
+      schema: dwh

@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: src_northwind
+    database: src_northwind
+    tables:
+      - name: orders
+      - name: order_details
+      - name: products
+      - name: customers
+      - name: categories
