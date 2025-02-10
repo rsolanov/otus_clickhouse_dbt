@@ -1,6 +1,6 @@
-CREATE DATABASE src_northwind ENGINE = Atomic;
+CREATE DATABASE IF NOT EXISTS src_northwind ENGINE = Atomic;
 
-CREATE TABLE src_northwind.orders
+CREATE TABLE IF NOT EXISTS src_northwind.orders
 (
     order_id Int32,
     customer_id String,
@@ -19,7 +19,7 @@ CREATE TABLE src_northwind.orders
 )
 ENGINE = PostgreSQL('host.docker.internal:5432', 'NorthWind', 'orders', 'default', 'default');
 
-CREATE TABLE src_northwind.order_details
+CREATE TABLE IF NOT EXISTS src_northwind.order_details
 (
     order_id Int32,
     product_id Int32,
@@ -29,7 +29,7 @@ CREATE TABLE src_northwind.order_details
 )
 ENGINE = PostgreSQL('host.docker.internal:5432', 'NorthWind', 'order_details', 'default', 'default');
 
-CREATE TABLE src_northwind.customers
+CREATE TABLE IF NOT EXISTS src_northwind.customers
 (
 	customer_id String,
 	company_name String,
