@@ -12,7 +12,7 @@ services:
     environment:
       - CLICKHOUSE_USER=default
       - CLICKHOUSE_PASSWORD=default
-      - CLICKHOUSE_DB=default
+      - CLICKHOUSE_DB=dwh
     ports:
       - "8123:8123"
       - "9000:9000"
