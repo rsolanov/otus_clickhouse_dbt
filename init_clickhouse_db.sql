@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS dwh ENGINE = Atomic;
 CREATE DATABASE IF NOT EXISTS src_northwind ENGINE = Atomic;
 
 CREATE TABLE IF NOT EXISTS src_northwind.orders
