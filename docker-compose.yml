@@ -5,7 +5,9 @@ networks:
     
 services:
   clickhouse:
-    image: yandex/clickhouse-server
+    build:
+      context: .
+      dockerfile: Dockerfile.clickhouse
     container_name: dwh_clickhouse
     environment:
       - CLICKHOUSE_USER=default
@@ -14,6 +16,8 @@ services:
     ports:
       - "8123:8123"
       - "9000:9000"
+    volumes:
+      - clickhouse_data:/var/lib/clickhouse
     networks:
       - airflow-network
 
@@ -126,3 +130,4 @@ services:
 
 volumes:
   postgres_data:
+  clickhouse_data:
