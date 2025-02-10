@@ -26,3 +26,9 @@
 ## Команды dbt
 - Запуск build для локального проекта: dbt build --target local
 - запуск build для контейнера: dbt build --target container
+- Обновление документации: 
+> - dbt docs generate --target local 
+> - dbt docs generate --target container
+- Запуск сервера документации:
+> - dbt docs serve --port 8091 --target local
+> - dbt docs serve --port 8091 --target container
