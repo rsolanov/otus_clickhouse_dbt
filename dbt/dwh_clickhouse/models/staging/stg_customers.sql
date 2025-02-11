@@ -1,7 +1,7 @@
 {{ config (
     materialized='table',
     engine = 'MergeTree',
-    order_by ='order_id'
+    order_by ='customer_id'
     ) }}
 SELECT *
-FROM {{ source('src_northwind', 'orders') }}
+FROM {{ source('src_northwind', 'customers') }}

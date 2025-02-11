@@ -1,7 +1,7 @@
 {{ config (
     materialized='table',
     engine = 'MergeTree'
-    ) }}
+) }}
 
 WITH order_totals AS (
     SELECT
@@ -15,5 +15,5 @@ SELECT
     c.customer_id,
     c.company_name,
     COALESCE(ot.total_sales, 0) AS total_sales
-FROM {{ source('src_northwind', 'customers') }} c
+FROM {{ ref('stg_customers') }} c
 LEFT JOIN order_totals ot ON c.customer_id = ot.customer_id
