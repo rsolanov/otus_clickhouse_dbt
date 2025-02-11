@@ -37,6 +37,7 @@ sources:
           - name: ship_country
             description: Страна доставки заказа
       - name: order_details
+        description: Таблица, содержащая информацию о детальных данных заказах клиентов
         columns:
           - name: order_id
             description: Идентификатор заказа, к которому относится товар
@@ -49,12 +50,14 @@ sources:
           - name: discount
             description: Скидка на товар (в долях от 1)
       - name: products
+        description: Таблица, содержащая информацию о товарах
         columns:
           - name: product_id
             description: Уникальный идентификатор товара
           - name: category_id
             description: Идентификатор категории товара
       - name: customers
+        description: Таблица, содержащая информацию о клиентах
         columns:
           - name: customer_id
             description: Уникальный идентификатор клиента
@@ -63,6 +66,7 @@ sources:
           - name: contact_name
             description: Имя контактного лица в компании
       - name: categories
+        description: Таблица, содержащая информацию о категориях товаров
         columns:
           - name: category_id
             description: Идентификатор категории
