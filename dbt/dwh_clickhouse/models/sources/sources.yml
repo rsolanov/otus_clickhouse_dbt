@@ -3,9 +3,68 @@ version: 2
 sources:
   - name: src_northwind
     database: src_northwind
+    description: Демонстрационная база данных Northwind
     tables:
       - name: orders
+        description: Таблица, содержащая информацию о заказах клиентов
+        columns:
+          - name: order_id
+            description: Уникальный идентификатор заказа
+          - name: customer_id
+            description: Идентификатор клиента, сделавшего заказ
+          - name: employee_id
+            description: Идентификатор сотрудника, оформившего заказ
+          - name: order_date
+            description: Дата оформления заказа
+          - name: required_date
+            description: Дата, к которой заказ должен быть выполнен
+          - name: shipped_date
+            description: Дата фактической отгрузки заказа
+          - name: ship_via
+            description: Идентификатор перевозчика, осуществляющего доставку
+          - name: freight
+            description: Стоимость доставки заказа
+          - name: ship_name
+            description: Имя получателя заказа
+          - name: ship_address
+            description: Адрес доставки заказа
+          - name: ship_city
+            description: Город доставки заказа
+          - name: ship_region
+            description: Регион доставки заказа
+          - name: ship_postal_code
+            description: Почтовый индекс адреса доставки
+          - name: ship_country
+            description: Страна доставки заказа
       - name: order_details
+        columns:
+          - name: order_id
+            description: Идентификатор заказа, к которому относится товар
+          - name: product_id
+            description: Идентификатор товара
+          - name: unit_price
+            description: Цена за единицу товара
+          - name: quantity
+            description: Количество товара в заказе
+          - name: discount
+            description: Скидка на товар (в долях от 1)
       - name: products
+        columns:
+          - name: product_id
+            description: Уникальный идентификатор товара
+          - name: category_id
+            description: Идентификатор категории товара
       - name: customers
+        columns:
+          - name: customer_id
+            description: Уникальный идентификатор клиента
+          - name: company_name
+            description: Название компании клиента
+          - name: contact_name
+            description: Имя контактного лица в компании
       - name: categories
+        columns:
+          - name: category_id
+            description: Идентификатор категории
+          - name: category_name
+            description: Название категории
