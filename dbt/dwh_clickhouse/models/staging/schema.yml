@@ -1,0 +1,102 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: Модель, содержащая данные о заказах из таблицы orders
+    columns:
+      - name: order_id
+        description: Уникальный идентификатор заказа
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: Идентификатор клиента, сделавшего заказ
+        data_tests:
+          - not_null
+      - name: employee_id
+        description: Идентификатор сотрудника, оформившего заказ
+      - name: order_date
+        description: Дата оформления заказа
+        data_tests:
+          - not_null
+      - name: required_date
+        description: Дата, к которой заказ должен быть выполнен
+      - name: shipped_date
+        description: Дата фактической отгрузки заказа
+      - name: ship_via
+        description: Идентификатор перевозчика, осуществляющего доставку
+      - name: freight
+        description: Стоимость доставки заказа
+      - name: ship_name
+        description: Имя получателя заказа
+      - name: ship_address
+        description: Адрес доставки заказа
+      - name: ship_city
+        description: Город доставки заказа
+      - name: ship_region
+        description: Регион доставки заказа
+      - name: ship_postal_code
+        description: Почтовый индекс адреса доставки
+      - name: ship_country
+        description: Страна доставки заказа
+
+  - name: stg_order_details
+    description: Модель, содержащая данные о деталях заказов из таблицы order_details
+    columns:
+      - name: order_id
+        description: Идентификатор заказа, к которому относится товар
+        data_tests:
+          - not_null
+      - name: product_id
+        description: Идентификатор товара
+        data_tests:
+          - not_null
+      - name: unit_price
+        description: Цена за единицу товара
+        data_tests:
+          - not_null
+      - name: quantity
+        description: Количество товара в заказе
+        data_tests:
+          - not_null
+      - name: discount
+        description: Скидка на товар (в долях от 1)
+
+  - name: stg_products
+    description: Модель, содержащая данные о товарах из таблицы products
+    columns:
+      - name: product_id
+        description: Уникальный идентификатор товара
+        tests:
+          - not_null
+          - unique
+      - name: category_id
+        description: Идентификатор категории товара
+
+  - name: stg_customers
+    description: Модель, содержащая данные о клиентах из таблицы customers
+    columns:
+      - name: customer_id
+        description: Уникальный идентификатор клиента
+        data_tests:
+          - not_null
+          - unique
+      - name: company_name
+        description: Название компании клиента
+        data_tests:
+          - not_null
+      - name: contact_name
+        description: Имя контактного лица в компании
+
+  - name: stg_categories
+    description: Модель, содержащая данные о категориях товаров из таблицы categories
+    columns:
+      - name: category_id
+        description: Уникальный идентификатор категории
+        data_tests:
+          - not_null
+          - unique
+      - name: category_name
+        description: Название категории
+        data_tests:
+          - not_null

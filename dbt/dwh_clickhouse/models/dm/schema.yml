@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: dm_customer_sales
+    description: Витрина данных, содержащая информацию о суммарных продажах по клиентам
+    columns:
+      - name: customer_id
+        description: Уникальный идентификатор клиента
+        data_tests:
+          - not_null
+      - name: company_name
+        description: Название компании клиента
+        data_tests:
+          - not_null
+      - name: contact_name
+        description: Имя контактного лица в компании
+      - name: total_sales
+        description: Суммарные продажи по клиенту
+        data_tests:
+          - not_null
+
+  - name: dm_category_sales
+    description: Витрина данных, содержащая информацию о суммарных продажах по категориям товаров
+    columns:
+      - name: category_id
+        description: Уникальный идентификатор категории
+        data_tests:
+          - not_null
+      - name: category_name
+        description: Название категории
+        data_tests:
+          - not_null
+      - name: total_sales
+        description: Суммарные продажи по категории
+        data_tests:
+          - not_null
