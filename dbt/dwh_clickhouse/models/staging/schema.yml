@@ -67,7 +67,7 @@ models:
     columns:
       - name: product_id
         description: Уникальный идентификатор товара
-        tests:
+        data_tests:
           - not_null
           - unique
       - name: category_id
