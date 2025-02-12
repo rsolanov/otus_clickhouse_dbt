@@ -3,6 +3,7 @@ dwh_clickhouse:
   outputs:
     local:
       type: clickhouse
+      threads: 8
       host: host.docker.internal
       port: 8123
       user: default
@@ -11,6 +12,7 @@ dwh_clickhouse:
       schema: dwh
     container:
       type: clickhouse
+      threads: 8
       host: clickhouse
       port: 9000
       user: default
