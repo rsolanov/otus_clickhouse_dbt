@@ -15,8 +15,8 @@ with DAG(
     'dbt_daily_build',
     default_args=default_args,
     description='A DAG to run dbt build daily',
-    schedule_interval='0 * * * *',  # Запуск каждый час
-    start_date=datetime(2023, 1, 1),
+    schedule_interval='0 0 * * *',
+    start_date=datetime(2025, 1, 1),
     catchup=False,
 ) as dag:
 
