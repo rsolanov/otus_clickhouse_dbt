@@ -1,3 +1,4 @@
+# Проектная работа на тему "Использование dbt для трансформации данных в ClickHouse"
 # Развертывание проекта
 - docker-compose build
 - docker-compose up -d
