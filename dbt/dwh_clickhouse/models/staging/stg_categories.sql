@@ -3,5 +3,7 @@
     engine = 'MergeTree',
     order_by ='category_id'
     ) }}
-SELECT *
+SELECT
+    category_id,
+    category_name
 FROM {{ source('src_northwind', 'categories') }}
