@@ -45,7 +45,9 @@
 - Обновление контейнера и его запуск:
   - PowerShell: docker-compose rm -sf dbt; docker-compose build dbt; docker-compose up -d dbt
   - Bash: docker-compose rm -sf dbt && docker-compose build dbt && docker-compose up -d dbt
-- Перейти в контейнер и запустить bash команды: docker-compose exec dbt bash
+- Перейти в контейнер и запустить bash команды: 
+> - docker-compose exec dbt bash
+> - docker exec -it dwh_dbt bash
 - Пересборка всех образов: docker-compose up -d --build
 - Сборка всех образов: docker-compose build
 - Удаление всех образов: ```docker rmi $(docker-compose config | grep "image:" | awk '{print $2}' | sort | uniq)```
@@ -60,7 +62,7 @@
 - запуск build для контейнера: dbt build --target container
 - Обновление документации: 
 > - dbt docs generate --target local 
-> - dbt docs generate --target container
+> - docker exec -it dwh_dbt dbt docs generate --target container
 - Запуск сервера документации:
 > - dbt docs serve --port 8091 --target local
-> - dbt docs serve --port 8091 --target container
+> - docker exec -it dwh_dbt dbt docs serve --port 8091 --target container
