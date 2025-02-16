@@ -58,11 +58,12 @@
 - Установка библиотек Python: cd dbt; pip install -r requirements.txt
 
 ## Команды dbt
-- Запуск build для локального проекта: dbt build --target local
-- запуск build для контейнера: dbt build --target container
+- Запуск build: 
+> - для локального проекта: dbt build --target local
+> - для контейнера docker: exec -it dwh_dbt dbt build --target container
 - Обновление документации: 
-> - dbt docs generate --target local 
-> - docker exec -it dwh_dbt dbt docs generate --target container
+> - для локального проекта: dbt docs generate --target local 
+> - для контейнера docker: exec -it dwh_dbt dbt docs generate --target container
 - Запуск сервера документации:
-> - dbt docs serve --port 8091 --target local
-> - docker exec -it dwh_dbt dbt docs serve --port 8091 --target container
+> - для локального проекта: dbt docs serve --port 8091 --target local
+> - для контейнера docker: exec -it dwh_dbt dbt docs serve --port 8091 --host 0.0.0.0 --target container
