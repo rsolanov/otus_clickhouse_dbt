@@ -123,6 +123,8 @@ services:
       context: .
       dockerfile: Dockerfile.dbt
     container_name: dwh_dbt
+    ports:
+      - "8091:8091"
     volumes:
       - ./dbt:/dbt
     networks:
